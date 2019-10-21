@@ -85,5 +85,4 @@ Essa tecnologia é amplamente usada em:
 
 ## Licença
 
-[`Apache License 2.0`](./LICENSE)
-[![Apache License 2.0](https://img.shields.io/badge/license-Apache%202-blue.svg)](./LICENSE)
+(https://img.shields.io/badge/license-Apache%202-blue.svg)](./LICENSE)
