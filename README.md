@@ -63,7 +63,7 @@ Essa tecnologia é amplamente usada em:
 
 [Demo.zip](https://github.com/antoniojmsjr/IPGeoLocation/files/3751804/Demo.zip)
 
-```
+```delphi
   try
      TIPGeoLocation
     .New
