@@ -131,7 +131,7 @@ begin
         .Execute
         .ToJSON(ResultJSON);
   except
-    on E: EIPGeoLocationRequestException do
+    on E: Exception do
       begin
         ShowMessage(E.Message);
       end;
