@@ -70,7 +70,7 @@ Essa tecnologia é amplamente usada em:
       .IP['189.27.181.129']
       .Provider[TTypeIPGeoLocationProvider.IPInfo]
       .Params
-        .Request
+      .Request
         .Execute
         .ToJSON(ResultJSON); 
   except
