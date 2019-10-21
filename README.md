@@ -84,4 +84,4 @@ Essa tecnologia é amplamente usada em:
 
 
 ## Licença
-[![License](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/antoniojmsjr/IPGeoLocation/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/antoniojmsjr/IPGeoLocation/blob/master/LICENSE)
