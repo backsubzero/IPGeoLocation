@@ -5,7 +5,7 @@
 
 Biblioteca de geolocalização por IP.
 
-Implementa uma classe de abstração que recupera as informações de geolocalização de um IP utilizando provedores de solução “IP-Geolocation”.
+Implementa uma classe de abstração que recupera informações de geolocalização de um IP utilizando provedores de solução “IP-Geolocation”.
 
 ## O que é a geolocalização de IP?
 
