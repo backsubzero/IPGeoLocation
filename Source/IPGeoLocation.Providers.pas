@@ -91,6 +91,8 @@ type
     function GetISP: string;
     function GetValues(const pValue: string): string;
     function GetEnd: IIPGeoLocationProvider;
+    function Execute: IIPGeoLocationRequest; virtual;
+    function ToJSON(pResult: TEventIPGeoLocationResultString): IIPGeoLocationRequest; virtual;    
   protected
     { protected declarations }
     [weak] //NÃO INCREMENTA O CONTADOR DE REFERÊNCIA
@@ -133,8 +135,6 @@ type
     [JsonName('ISP')]
     FISP: string;
     procedure InternalExecute; virtual; abstract;
-    function Execute: IIPGeoLocationRequest; virtual;
-    function ToJSON(pResult: TEventIPGeoLocationResultString): IIPGeoLocationRequest; virtual;
   public
     { public declarations }
     constructor Create(pParent: IIPGeoLocationProvider; const pIP: string);
