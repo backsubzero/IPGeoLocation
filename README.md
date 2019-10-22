@@ -1,5 +1,6 @@
-![Maintained YES](https://img.shields.io/badge/Maintained%3F-yes-green.svg)  
-![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)
+![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-XE%20and%20ever-blue.svg)
+![Platforms](https://img.shields.io/badge/Platforms-Win32%20and%20Win64-red.svg)
+![Compatibility](https://img.shields.io/badge/Compatibility-VCL,%20Firemonkey%20DataSnap%20and%20uniGUI-brightgreen.svg)
 
 # IPGeoLocation
 
