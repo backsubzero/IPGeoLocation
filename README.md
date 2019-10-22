@@ -77,9 +77,9 @@ Essa tecnologia é amplamente usada em:
         .ToJSON(ResultJSON); 
   except
     on E: EIPGeoLocationRequestException do
-      begin
-        ShowMessage(E.Message);
-      end;
+    begin
+      ShowMessage(E.Message);
+    end;
   end;
 ```
 ![IP Geolocalização](https://user-images.githubusercontent.com/20980984/67174716-834e3f80-f399-11e9-9d5f-daa1e268a78e.png)
