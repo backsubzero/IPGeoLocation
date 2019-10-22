@@ -651,7 +651,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTAÇÃO DA API
+  //CONFORME A DOCUMENTAÇÃO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -761,7 +761,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTAÇÃO DA API
+  //CONFORME A DOCUMENTAÇÃO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -881,7 +881,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTAÇÃO DA API
+  //CONFORME A DOCUMENTAÇÃO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -1003,7 +1003,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTAÇÃO DA API
+  //CONFORME A DOCUMENTAÇÃO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -1121,7 +1121,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTAÇÃO DA API
+  //CONFORME A DOCUMENTAÇÃO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -1229,7 +1229,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTAÇÃO DA API
+  //CONFORME A DOCUMENTAÇÃO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
