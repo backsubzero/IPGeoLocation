@@ -2,7 +2,7 @@
 {                                                                              }
 {           IPGeoLocation.Providers                                            }
 {                                                                              }
-{           Copyright (C) AntÙnio JosÈ Medeiros Schneider J˙nior               }
+{           Copyright (C) Ant√¥nio Jos√© Medeiros Schneider J√∫nior               }
 {                                                                              }
 {           https://github.com/antoniojmsjr                                    }
 {                                                                              }
@@ -26,7 +26,7 @@ unit IPGeoLocation.Providers;
 
 interface
 
-uses System.SysUtils, REST.Json.Types, IPGeoLocation.Classes, REST.Json, 
+uses System.SysUtils, REST.Json.Types, IPGeoLocation.Classes, REST.Json,
 REST.Types, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
@@ -47,7 +47,7 @@ type
     function GetEnd: IIPGeoLocation;
   protected
     { protected declarations }
-    [Weak] //N√O INCREMENTA O CONTADOR DE REFER NCIA
+    [Weak] //N√ÉO INCREMENTA O CONTADOR DE REFER√äNCIA
     FIPGeoLocation: IIPGeoLocation;
     FParamsExecuted: Boolean;
     FIP: string;
@@ -93,7 +93,7 @@ type
     function GetEnd: IIPGeoLocationProvider;
   protected
     { protected declarations }
-    [weak] //N√O INCREMENTA O CONTADOR DE REFER NCIA
+    [weak] //N√ÉO INCREMENTA O CONTADOR DE REFER√äNCIA
     [JSONMarshalled(False)]
     FIPGeoLocationProvider: IIPGeoLocationProvider;
     [JSONMarshalled(False)]
@@ -359,7 +359,7 @@ function TIPGeoLocationProviderCustom.GetRequest: IIPGeoLocationRequest;
 begin
   if not FParamsExecuted then
     raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_PARAMS_NOT_FOUND,
-      FID, 'ConfiguraÁ„o n„o informada.');
+      FID, 'Configura√ß√£o n√£o informada.');
 end;
 
 function TIPGeoLocationProviderCustom.GetEnd: IIPGeoLocation;
@@ -416,7 +416,7 @@ begin
   FIPGeoLocationProvider := pParent;
   FIP := pIP;
 
-  //IDENTIFICA«√O DO PROVEDOR
+  //IDENTIFICA√á√ÉO DO PROVEDOR
   FProvider := FIPGeoLocationProvider.ID;
 
   FRESTClient   := TRESTClient.Create(nil);
@@ -627,7 +627,7 @@ var
   lFormatSettings: TFormatSettings;
 begin
 
-  //CONFORME A DOCUMENTA«√O DA API
+  //CONFORME A DOCUMENTA√á√ÉO DA API
   FRESTClient.BaseURL := FIPGeoLocationProvider.URI;
   FRESTClient.Accept  := FIPGeoLocationProvider.RequestAccept;
 
@@ -638,11 +638,11 @@ begin
 
   //IP
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[0].Name := 'IP';
-  FRESTRequest.Params.Items[0].Kind := TRESTRequestParameterKind.pkURLSEGMENT;
-  FRESTRequest.Params.Items[0].Value := FIP;
+  FRESTRequest.Params.Items[0].Name   := 'IP';
+  FRESTRequest.Params.Items[0].Value  := FIP;
+  FRESTRequest.Params.Items[0].Kind   := TRESTRequestParameterKind.pkURLSEGMENT;
 
-  //REQUISI«√O
+  //REQUISI√á√ÉO
   try
     FRESTRequest.Execute();
   except
@@ -651,7 +651,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTA«√O DA API
+  //RETORNO CONFORME A DOCUMENTA√á√ÉO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -728,7 +728,7 @@ var
   lJSONObject: TJSONObject;
 begin
 
-  //CONFORME A DOCUMENTA«√O DA API
+  //CONFORME A DOCUMENTA√á√ÉO DA API
   FRESTClient.BaseURL := FIPGeoLocationProvider.URI;
   FRESTClient.Accept  := FIPGeoLocationProvider.RequestAccept;
 
@@ -736,23 +736,23 @@ begin
 
   //API KEY
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[0].Name := 'apiKey'; //case-sensitive
-  FRESTRequest.Params.Items[0].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[0].Value := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[0].Name   := 'apiKey'; //case-sensitive
+  FRESTRequest.Params.Items[0].Value  := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[0].Kind   := TRESTRequestParameterKind.pkQUERY;
 
   //IP
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[1].Name := 'ip';
-  FRESTRequest.Params.Items[1].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[1].Value := FIP;
+  FRESTRequest.Params.Items[1].Name   := 'ip';
+  FRESTRequest.Params.Items[1].Value  := FIP;
+  FRESTRequest.Params.Items[1].Kind   := TRESTRequestParameterKind.pkQUERY;
 
   //LINGUAGEM
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[2].Name := 'lang';
-  FRESTRequest.Params.Items[2].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[2].Value := 'en';
+  FRESTRequest.Params.Items[2].Name   := 'lang';
+  FRESTRequest.Params.Items[2].Value  := 'en';
+  FRESTRequest.Params.Items[2].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //REQUISI«√O
+  //REQUISI√á√ÉO
   try
     FRESTRequest.Execute();
   except
@@ -761,7 +761,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTA«√O DA API
+  //RETORNO CONFORME A DOCUMENTA√á√ÉO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -842,7 +842,7 @@ var
   lJSONObject: TJSONObject;
 begin
 
-  //REQUISI«√O CONFORME A DOCUMENTA«√O DA API
+  //CONFORME A DOCUMENTA√á√ÉO DA API
   FRESTClient.BaseURL := FIPGeoLocationProvider.URI;
   FRESTClient.Accept  := FIPGeoLocationProvider.RequestAccept;
 
@@ -850,29 +850,29 @@ begin
 
   //KEY API
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[0].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[0].Name := 'key';
-  FRESTRequest.Params.Items[0].Value := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[0].Name   := 'key';
+  FRESTRequest.Params.Items[0].Value  := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[0].Kind   := TRESTRequestParameterKind.pkQUERY;
 
   //IP
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[1].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[1].Name := 'ip';
-  FRESTRequest.Params.Items[1].Value := FIP;
+  FRESTRequest.Params.Items[1].Name   := 'ip';
+  FRESTRequest.Params.Items[1].Value  := FIP;
+  FRESTRequest.Params.Items[1].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //CONFIGURA«’ES EXTRAS - DOCUMENTA«√O
+  //CONFIGURA√á√ïES EXTRAS - DOCUMENTA√á√ÉO
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[2].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[2].Name := 'package';
-  FRESTRequest.Params.Items[2].Value := 'WS24';
+  FRESTRequest.Params.Items[2].Name   := 'package';
+  FRESTRequest.Params.Items[2].Value  := 'WS24';
+  FRESTRequest.Params.Items[2].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //CONFIGURA«’ES EXTRAS - DOCUMENTA«√O
+  //CONFIGURA√á√ïES EXTRAS - DOCUMENTA√á√ÉO
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[3].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[3].Name := 'addon';
-  FRESTRequest.Params.Items[3].Value := 'country,time_zone_info';
+  FRESTRequest.Params.Items[3].Name   := 'addon';
+  FRESTRequest.Params.Items[3].Value  := 'country,time_zone_info';
+  FRESTRequest.Params.Items[3].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //REQUISI«√O
+  //REQUISI√á√ÉO
   try
     FRESTRequest.Execute();
   except
@@ -881,7 +881,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTA«√O DA API
+  //RETORNO CONFORME A DOCUMENTA√á√ÉO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -956,7 +956,7 @@ var
   lJSONObject: TJSONObject;
 begin
 
-  //REQUISI«√O CONFORME A DOCUMENTA«√O DA API
+  //CONFORME A DOCUMENTA√á√ÉO DA API
   FRESTClient.BaseURL := FIPGeoLocationProvider.URI;
   FRESTClient.Accept  := FIPGeoLocationProvider.RequestAccept;
 
@@ -967,34 +967,34 @@ begin
 
   //IP
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[0].Kind := TRESTRequestParameterKind.pkURLSEGMENT;
-  FRESTRequest.Params.Items[0].Name := 'ip';
-  FRESTRequest.Params.Items[0].Value := FIP;
+  FRESTRequest.Params.Items[0].Name   := 'ip';
+  FRESTRequest.Params.Items[0].Value  := FIP;
+  FRESTRequest.Params.Items[0].Kind   := TRESTRequestParameterKind.pkURLSEGMENT;
 
   //KEY API
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[1].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[1].Name := 'access_key';
-  FRESTRequest.Params.Items[1].Value := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[1].Name   := 'access_key';
+  FRESTRequest.Params.Items[1].Value  := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[1].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //FORMATO DE SAÕDA
+  //FORMATO DE SA√çDA
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[2].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[2]. Name := 'output';
-  FRESTRequest.Params.Items[2].Value := 'json';
+  FRESTRequest.Params.Items[2].Name   := 'output';
+  FRESTRequest.Params.Items[2].Value  := 'json';
+  FRESTRequest.Params.Items[2].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //LINGUAGEM DE SAÕDA
+  //LINGUAGEM DE SA√çDA
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[3].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[3].Name := 'language';
-  FRESTRequest.Params.Items[3].Value := 'pt-br';
+  FRESTRequest.Params.Items[3].Name   := 'language';
+  FRESTRequest.Params.Items[3].Value  := 'pt-br';
+  FRESTRequest.Params.Items[3].Kind   := TRESTRequestParameterKind.pkQUERY;
 
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[4].Name := 'hostname';
-  FRESTRequest.Params.Items[4].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[4].Value := '1';
+  FRESTRequest.Params.Items[4].Name   := 'hostname';
+  FRESTRequest.Params.Items[4].Value  := '1';
+  FRESTRequest.Params.Items[4].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //REQUISI«√O
+  //REQUISI√á√ÉO
   try
     FRESTRequest.Execute();
   except
@@ -1003,7 +1003,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTA«√O DA API
+  //RETORNO CONFORME A DOCUMENTA√á√ÉO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -1076,7 +1076,7 @@ var
 begin
   lRequestSuccessAPI := True;
 
-  //REQUISI«√O CONFORME A DOCUMENTA«√O DA API
+  //CONFORME A DOCUMENTA√á√ÉO DA API
   FRESTClient.BaseURL := FIPGeoLocationProvider.URI;
   FRESTClient.Accept  := FIPGeoLocationProvider.RequestAccept;
 
@@ -1085,34 +1085,34 @@ begin
 
   //IP
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[0].Kind := TRESTRequestParameterKind.pkURLSEGMENT;
-  FRESTRequest.Params.Items[0].Name := 'ip';
-  FRESTRequest.Params.Items[0].Value := FIP;
+  FRESTRequest.Params.Items[0].Name   := 'ip';
+  FRESTRequest.Params.Items[0].Value  := FIP;
+  FRESTRequest.Params.Items[0].Kind   := TRESTRequestParameterKind.pkURLSEGMENT;
 
   //KEY API
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[1].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[1].Name := 'access_key';
-  FRESTRequest.Params.Items[1].Value := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[1].Name   := 'access_key';
+  FRESTRequest.Params.Items[1].Value  := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[1].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //FORMATO DE SAÕDA
+  //FORMATO DE SA√çDA
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[2].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[2].Name := 'output';
-  FRESTRequest.Params.Items[2].Value := 'json';
+  FRESTRequest.Params.Items[2].Name   := 'output';
+  FRESTRequest.Params.Items[2].Value  := 'json';
+  FRESTRequest.Params.Items[2].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //LINGUAGEM DE SAÕDA
+  //LINGUAGEM DE SA√çDA
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[3].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[3].Name := 'language';
-  FRESTRequest.Params.Items[3].Value := 'pt-br';
+  FRESTRequest.Params.Items[3].Name   := 'language';
+  FRESTRequest.Params.Items[3].Value  := 'pt-br';
+  FRESTRequest.Params.Items[3].Kind   := TRESTRequestParameterKind.pkQUERY;
 
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[4].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[4].Name := 'hostname';
-  FRESTRequest.Params.Items[4].Value := '1';
+  FRESTRequest.Params.Items[4].Name   := 'hostname';
+  FRESTRequest.Params.Items[4].Value  := '1';
+  FRESTRequest.Params.Items[4].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //REQUISI«√O
+  //REQUISI√á√ÉO
   try
     FRESTRequest.Execute();
   except
@@ -1121,7 +1121,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTA«√O DA API
+  //RETORNO CONFORME A DOCUMENTA√á√ÉO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
@@ -1136,7 +1136,7 @@ begin
             TEncoding.UTF8.GetBytes(FRESTResponse.JSONValue.ToString), 0) as TJSONObject;
 
 
-        //CONFORME A DOCUMENTA«√O DA API
+        //CONFORME A DOCUMENTA√á√ÉO DA API
         lJSONObject.TryGetValue('success', lRequestSuccessAPI);
         if (lRequestSuccessAPI = False) then
         begin
@@ -1202,7 +1202,7 @@ procedure TIPGeoLocationRequestIPIfy.InternalExecute;
 var
   lJSONObject: TJSONObject;
 begin
-  //REQUISI«√O CONFORME A DOCUMENTA«√O DA API
+  //CONFORME A DOCUMENTA√á√ÉO DA API
   FRESTClient.BaseURL := FIPGeoLocationProvider.URI;
   FRESTClient.Accept  := FIPGeoLocationProvider.RequestAccept;
 
@@ -1210,17 +1210,17 @@ begin
 
   //KEY API
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[0].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[0].Name := 'apiKey';
-  FRESTRequest.Params.Items[0].Value := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[0].Name   := 'apiKey';
+  FRESTRequest.Params.Items[0].Value  := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[0].Kind   := TRESTRequestParameterKind.pkQUERY;
 
   //IP
   FRESTRequest.Params.AddItem;
-  FRESTRequest.Params.Items[1].Kind := TRESTRequestParameterKind.pkQUERY;
-  FRESTRequest.Params.Items[1].Name := 'ipAddress';
-  FRESTRequest.Params.Items[1].Value := FIP;
+  FRESTRequest.Params.Items[1].Name   := 'ipAddress';
+  FRESTRequest.Params.Items[1].Value  := FIP;
+  FRESTRequest.Params.Items[1].Kind   := TRESTRequestParameterKind.pkQUERY;
 
-  //REQUISI«√O
+  //REQUISI√á√ÉO
   try
     FRESTRequest.Execute();
   except
@@ -1229,7 +1229,7 @@ begin
               FProvider, E.Message);
   end;
 
-  //RETORNO CONFORME A DOCUMENTA«√O DA API
+  //RETORNO CONFORME A DOCUMENTA√á√ÉO DA API
   case FRESTResponse.StatusCode of
     200:
     begin
