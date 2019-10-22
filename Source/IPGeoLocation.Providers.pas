@@ -91,8 +91,8 @@ type
     function GetISP: string;
     function GetValues(const pValue: string): string;
     function GetEnd: IIPGeoLocationProvider;
-    function Execute: IIPGeoLocationRequest; virtual;
-    function ToJSON(pResult: TEventIPGeoLocationResultString): IIPGeoLocationRequest; virtual;    
+    function Execute: IIPGeoLocationRequest;
+    function ToJSON(pResult: TEventIPGeoLocationResultString): IIPGeoLocationRequest;
   protected
     { protected declarations }
     [weak] //NÃO INCREMENTA O CONTADOR DE REFERÊNCIA
