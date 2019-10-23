@@ -152,7 +152,6 @@ type
     function GetTimeZoneName: string;
     function GetTimeZoneOffset: string;
     function GetISP: string;
-    function GetValues(const pValue: string): string;
     function Execute: IIPGeoLocationRequest;
     function ToJSON(pResult: TEventIPGeoLocationResultString): IIPGeoLocationRequest;
     function GetEnd: IIPGeoLocationProvider;
@@ -172,7 +171,6 @@ type
     property TimeZoneName: string read GetTimeZoneName;
     property TimeZoneOffset: string read GetTimeZoneOffset;
     property ISP: string read GetISP;
-    property Values[const Value: string]: string read GetValues;
     property &End: IIPGeoLocationProvider read GetEnd;
   end;
 
