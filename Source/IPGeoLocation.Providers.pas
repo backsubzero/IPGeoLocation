@@ -89,7 +89,6 @@ type
     function GetTimeZoneName: string;
     function GetTimeZoneOffset: string;
     function GetISP: string;
-    function GetValues(const pValue: string): string;
     function GetEnd: IIPGeoLocationProvider;
     function Execute: IIPGeoLocationRequest;
     function ToJSON(pResult: TEventIPGeoLocationResultString): IIPGeoLocationRequest;
@@ -575,11 +574,6 @@ end;
 function TIPGeoLocationRequestCustom.GetTimeZoneOffset: string;
 begin
   Result := FTimeZoneOffset;
-end;
-
-function TIPGeoLocationRequestCustom.GetValues(const pValue: string): string;
-begin
-  Result := EmptyStr;
 end;
 
 function TIPGeoLocationRequestCustom.GetZipCode: string;
