@@ -339,6 +339,7 @@ constructor TIPGeoLocationProviderCustom.Create(pParent: IIPGeoLocation; const p
 begin
   Create(pParent);
   FIP := pIP;
+  FID := EmptyStr;
 end;
 
 function TIPGeoLocationProviderCustom.Params: IIPGeoLocationProvider;
