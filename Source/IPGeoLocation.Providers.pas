@@ -656,9 +656,8 @@ begin
         Exit;
 
       try
-        lJSONObject :=
-          TJSONObject.ParseJSONValue(
-            TEncoding.UTF8.GetBytes(FRESTResponse.JSONValue.ToString), 0) as TJSONObject;
+
+        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject; //TEncoding.UTF8.GetBytes=CODIFICAÇÃO INTERNA
 
         lJSONObject.TryGetValue('hostname', FHostName);
         lJSONObject.TryGetValue('city', FCity);
@@ -766,9 +765,8 @@ begin
         Exit;
 
       try
-        lJSONObject :=
-          TJSONObject.ParseJSONValue(
-            TEncoding.UTF8.GetBytes(FRESTResponse.JSONValue.ToString), 0) as TJSONObject;
+
+        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
 
         lJSONObject.TryGetValue('hostname', FHostName);
         lJSONObject.TryGetValue('country_code2', FCountryCode);
@@ -886,9 +884,7 @@ begin
         Exit;
 
       try
-        lJSONObject :=
-          TJSONObject.ParseJSONValue(
-            TEncoding.UTF8.GetBytes(FRESTResponse.JSONValue.ToString), 0) as TJSONObject;
+        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
 
         lJSONObject.TryGetValue('country_code', FCountryCode);
         lJSONObject.GetValue('country').TryGetValue('alpha3_code', FCountryCode3);
@@ -1008,9 +1004,8 @@ begin
         Exit;
 
       try
-        lJSONObject :=
-          TJSONObject.ParseJSONValue(
-            TEncoding.UTF8.GetBytes(FRESTResponse.JSONValue.ToString), 0) as TJSONObject;
+
+        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
 
         lJSONObject.TryGetValue('hostname', FHostName);
         lJSONObject.TryGetValue('country_code', FCountryCode);
@@ -1126,9 +1121,8 @@ begin
         Exit;
 
       try
-        lJSONObject :=
-          TJSONObject.ParseJSONValue(
-            TEncoding.UTF8.GetBytes(FRESTResponse.JSONValue.ToString), 0) as TJSONObject;
+
+        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
 
 
         //CONFORME A DOCUMENTAÇÃO DA API
@@ -1234,9 +1228,8 @@ begin
         Exit;
 
       try
-        lJSONObject :=
-          TJSONObject.ParseJSONValue(
-            TEncoding.UTF8.GetBytes(FRESTResponse.JSONValue.ToString), 0) as TJSONObject;
+
+        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject; //TEncoding.UTF8.GetBytes=CODIFICAÇÃO INTERNA
 
         lJSONObject.GetValue('location').TryGetValue('country', FCountryCode);
         lJSONObject.GetValue('location').TryGetValue('region', FRegion);
