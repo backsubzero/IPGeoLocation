@@ -146,7 +146,7 @@ begin
     end;
     on E: Exception do
     begin
-      ShowMessage(E.Message);
+      Application.MessageBox(PWideChar(E.Message), 'ATENÇÃO', MB_OK + MB_ICONERROR);
     end;
   end;
 end;

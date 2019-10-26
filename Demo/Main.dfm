@@ -36,7 +36,6 @@ object frmMain: TfrmMain
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = -1
     object Label1: TLabel
       Left = 9
       Top = 11
@@ -137,7 +136,6 @@ object frmMain: TfrmMain
     BevelOuter = bvNone
     Caption = 'Panel2'
     TabOrder = 1
-    ExplicitWidth = 727
     object Bevel2: TBevel
       Left = 300
       Top = 0
