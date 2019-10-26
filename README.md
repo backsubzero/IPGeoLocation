@@ -46,7 +46,6 @@ Essa tecnologia é amplamente usada em:
   * Em situação de emergência/ataque descartar tráfego “não esperado”
   * Controle de SPAM
   * Firewalls
-  * Governos
 
 ## Provedores Homologados
 
@@ -63,26 +62,40 @@ Essa tecnologia é amplamente usada em:
 
 ## Demo
 
-[Demo.zip](https://github.com/antoniojmsjr/IPGeoLocation/files/3751804/Demo.zip)
+[Demo.zip](https://github.com/antoniojmsjr/IPGeoLocation/files/3775350/Demo.zip)
 
 ```delphi
   try
      TIPGeoLocation
     .New
-      .IP['189.27.181.129']
+      .IP['177.97.112.28']
       .Provider[TTypeIPGeoLocationProvider.IPInfo]
-      .Params
+        .Params
       .Request
         .Execute
         .ToJSON(ResultJSON); 
   except
     on E: EIPGeoLocationRequestException do
     begin
+      var lMsg: string;
+      lMsg := EmptyStr;
+      lMsg := Concat(lMsg, Format('Provider: %s', [E.Provider]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Kind: %s', [IPGeoLocationExceptionKindToString(E.Kind)]), sLineBreak);
+      lMsg := Concat(lMsg, Format('URL: %s', [E.URL]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Method: %s', [E.Method]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Status Code: %d', [E.StatusCode]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Status Text: %s', [E.StatusText]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Message: %s', [E.Message]), sLineBreak);
+
+      Application.MessageBox(PWideChar(lMsg), 'ATENÇÃO', MB_OK + MB_ICONERROR);
+    end;
+    on E: Exception do
+    begin
       ShowMessage(E.Message);
     end;
   end;
 ```
-![IP Geolocalização](https://user-images.githubusercontent.com/20980984/67174716-834e3f80-f399-11e9-9d5f-daa1e268a78e.png)
+![IP Geolocalização](https://user-images.githubusercontent.com/20980984/67627133-0e618680-f82d-11e9-9594-2d71a621daa4.png)
 
 
 ## Licença

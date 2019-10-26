@@ -5,7 +5,7 @@
         <ProjectVersion>18.6</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Package</AppType>
@@ -143,8 +143,11 @@
         <DCCReference Include="bindengine.dcp"/>
         <DCCReference Include="bindcomp.dcp"/>
         <DCCReference Include="RESTComponents.dcp"/>
-        <DCCReference Include="Source\IPGeoLocation.Classes.pas"/>
+        <DCCReference Include="Source\IPGeoLocation.pas"/>
         <DCCReference Include="Source\IPGeoLocation.Providers.pas"/>
+        <DCCReference Include="Source\IPGeoLocation.Providers.Factory.pas"/>
+        <DCCReference Include="Source\IPGeoLocation.Types.pas"/>
+        <DCCReference Include="Source\IPGeoLocation.Interfaces.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

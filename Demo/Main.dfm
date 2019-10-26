@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 0
   Caption = 'IP Geolocaliza'#231#227'o'
   ClientHeight = 461
-  ClientWidth = 684
+  ClientWidth = 783
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,7 +11,7 @@ object frmMain: TfrmMain
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poDesigned
   WindowState = wsMaximized
   OnShow = FormShow
   PixelsPerInch = 96
@@ -19,7 +19,7 @@ object frmMain: TfrmMain
   object Bevel1: TBevel
     Left = 0
     Top = 60
-    Width = 684
+    Width = 783
     Height = 5
     Align = alTop
     Shape = bsTopLine
@@ -29,13 +29,14 @@ object frmMain: TfrmMain
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 684
+    Width = 783
     Height = 60
     Align = alTop
     BevelOuter = bvNone
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
+    ExplicitTop = -1
     object Label1: TLabel
       Left = 9
       Top = 11
@@ -50,7 +51,7 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 232
+      Left = 320
       Top = 11
       Width = 52
       Height = 13
@@ -62,10 +63,17 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Bevel4: TBevel
+      Left = 300
+      Top = 5
+      Width = 5
+      Height = 50
+      Shape = bsLeftLine
+    end
     object edtIP: TEdit
       Left = 9
       Top = 30
-      Width = 200
+      Width = 160
       Height = 24
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -77,17 +85,17 @@ object frmMain: TfrmMain
       Text = '8.8.8.8'
     end
     object cbxProvedor: TComboBox
-      Left = 232
+      Left = 320
       Top = 30
-      Width = 200
+      Width = 160
       Height = 24
       Style = csDropDownList
+      DropDownCount = 10
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
-      ItemIndex = 0
       ParentFont = False
       TabOrder = 1
       Items.Strings = (
@@ -97,10 +105,12 @@ object frmMain: TfrmMain
         'IP2Location'
         'IP API'
         'IP Stack'
-        'IP Ify')
+        'IP Ify'
+        'IPGeolocationAPI'
+        'IPData')
     end
     object btnLocalizacao: TButton
-      Left = 460
+      Left = 500
       Top = 29
       Width = 100
       Height = 25
@@ -109,7 +119,7 @@ object frmMain: TfrmMain
       OnClick = btnLocalizacaoClick
     end
     object btnIPExterno: TButton
-      Left = 605
+      Left = 185
       Top = 29
       Width = 100
       Height = 25
@@ -121,14 +131,15 @@ object frmMain: TfrmMain
   object Panel2: TPanel
     Left = 0
     Top = 65
-    Width = 684
+    Width = 783
     Height = 396
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Panel2'
     TabOrder = 1
+    ExplicitWidth = 727
     object Bevel2: TBevel
-      Left = 220
+      Left = 300
       Top = 0
       Width = 5
       Height = 396
@@ -138,7 +149,7 @@ object frmMain: TfrmMain
       ExplicitHeight = 453
     end
     object Bevel3: TBevel
-      Left = 525
+      Left = 605
       Top = 0
       Width = 5
       Height = 396
@@ -150,7 +161,7 @@ object frmMain: TfrmMain
     object Panel3: TPanel
       Left = 0
       Top = 0
-      Width = 220
+      Width = 300
       Height = 396
       Align = alLeft
       BevelOuter = bvNone
@@ -159,7 +170,7 @@ object frmMain: TfrmMain
       object mmoJSONGeolocalizacao: TMemo
         Left = 0
         Top = 0
-        Width = 220
+        Width = 300
         Height = 396
         Align = alClient
         BevelInner = bvNone
@@ -177,7 +188,7 @@ object frmMain: TfrmMain
       end
     end
     object Panel4: TPanel
-      Left = 225
+      Left = 305
       Top = 0
       Width = 300
       Height = 396
@@ -194,21 +205,21 @@ object frmMain: TfrmMain
         BorderStyle = bsNone
         KeyOptions = [keyEdit, keyUnique]
         Strings.Strings = (
-          'IP ='
-          'Provider ='
-          'HostName ='
-          'CountryCode ='
-          'CountryCode3 ='
-          'CountryName ='
-          'CountryFlag ='
-          'Region ='
-          'City ='
-          'ZipCode ='
-          'Latitude ='
-          'Longitude ='
-          'TimeZoneName ='
-          'TimeZoneOffset ='
-          'ISP =')
+          'ip ='
+          'provider ='
+          'hostname ='
+          'country_code ='
+          'country_code3 ='
+          'country_name ='
+          'country_flag ='
+          'region ='
+          'city ='
+          'zip_code ='
+          'latitude ='
+          'longitude ='
+          'timezone_offset ='
+          'timezone_name ='
+          'isp =')
         TabOrder = 0
         ColWidths = (
           89
@@ -216,18 +227,17 @@ object frmMain: TfrmMain
       end
     end
     object wbrMaps: TWebBrowser
-      Left = 530
+      Left = 610
       Top = 0
-      Width = 154
+      Width = 173
       Height = 396
       Align = alClient
       TabOrder = 2
-      ExplicitLeft = 441
-      ExplicitTop = 1
-      ExplicitWidth = 302
-      ExplicitHeight = 383
+      ExplicitLeft = 512
+      ExplicitTop = 6
+      ExplicitWidth = 124
       ControlData = {
-        4C000000EB0F0000EE2800000000000000000000000000000000000000000000
+        4C000000E1110000EE2800000000000000000000000000000000000000000000
         000000004C000000000000000000000001000000E0D057007335CF11AE690800
         2B2E126208000000000000004C0000000114020000000000C000000000000046
         8000000000000000000000000000000000000000000000000000000000000000

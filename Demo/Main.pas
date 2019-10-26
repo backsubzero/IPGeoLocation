@@ -1,10 +1,10 @@
-{******************************************************************************}
+﻿{******************************************************************************}
 {                                                                              }
 {           Demo                                              }
 {                                                                              }
 {           Copyright (C) Antônio José Medeiros Schneider Júnior               }
 {                                                                              }
-{           https://github.com/antoniojmsjr                                    }
+{           https://github.com/antoniojmsjr/IPGeoLocation                      }
 {                                                                              }
 {                                                                              }
 {******************************************************************************}
@@ -53,6 +53,7 @@ type
     Bevel3: TBevel;
     vleJSON: TValueListEditor;
     wbrMaps: TWebBrowser;
+    Bevel4: TBevel;
     procedure btnIPExternoClick(Sender: TObject);
     procedure btnLocalizacaoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -69,7 +70,7 @@ var
 implementation
 
 uses
-  System.JSON, REST.Json, IPGeoLocation.Classes;
+  System.JSON, REST.Json, IPGeoLocation, IPGeoLocation.Types;
 
 {$R *.dfm}
 
@@ -95,8 +96,7 @@ begin
 
         try
           lJSONObject :=
-            TJSONObject.ParseJSONValue(
-              TEncoding.UTF8.GetBytes(rstResponseGetIP.JSONValue.ToString), 0) as TJSONObject;
+            TJSONObject.ParseJSONValue(rstResponseGetIP.JSONValue.ToString) as TJSONObject;
 
           lJSONObject.TryGetValue('ip', lIP);
 
@@ -120,21 +120,34 @@ end;
 
 procedure TfrmMain.btnLocalizacaoClick(Sender: TObject);
 begin
-
   try
     TIPGeoLocation
     .New
       .IP[edtIP.Text]
-      .Provider[TTypeIPGeoLocationProvider(cbxProvedor.ItemIndex)]
+      .Provider[TIPGeoLocationProviderType(cbxProvedor.ItemIndex)]
       .Params
         .Request
         .Execute
         .ToJSON(ResultJSON);
   except
+    on E: EIPGeoLocationRequestException do
+    begin
+      var lMsg: string;
+      lMsg := EmptyStr;
+      lMsg := Concat(lMsg, Format('Provider: %s', [E.Provider]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Kind: %s', [IPGeoLocationExceptionKindToString(E.Kind)]), sLineBreak);
+      lMsg := Concat(lMsg, Format('URL: %s', [E.URL]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Method: %s', [E.Method]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Status Code: %d', [E.StatusCode]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Status Text: %s', [E.StatusText]), sLineBreak);
+      lMsg := Concat(lMsg, Format('Message: %s', [E.Message]), sLineBreak);
+
+      Application.MessageBox(PWideChar(lMsg), 'ATENÇÃO', MB_OK + MB_ICONERROR);
+    end;
     on E: Exception do
-      begin
-        ShowMessage(E.Message);
-      end;
+    begin
+      ShowMessage(E.Message);
+    end;
   end;
 end;
 
@@ -152,17 +165,18 @@ var
   lLogitude: string;
   lLatitude: string;
 begin
-  lJSONObject := TJSONObject.ParseJSONValue(Value) as TJsonObject;
+  lJSONObject := TJSONObject.ParseJSONValue(Value, False, False) as TJsonObject;
+
   try
     mmoJSONGeolocalizacao.Clear;
-    mmoJSONGeolocalizacao.Lines.Add(TJson.Format(lJSONObject));
+    mmoJSONGeolocalizacao.Lines.Add(lJSONObject.Format());
 
     for var I := 0 to Pred(vleJSON.RowCount) do
       if lJSONObject.TryGetValue(vleJSON.Keys[I], lValueJSON) then
         vleJSON.Cells[1, I] := lValueJSON;
   
-    lJSONObject.TryGetValue('Latitude', lLatitude);
-    lJSONObject.TryGetValue('Longitude', lLogitude);
+    lJSONObject.TryGetValue('latitude', lLatitude);
+    lJSONObject.TryGetValue('longitude', lLogitude);
   finally
     if Assigned(lJSONObject) then
       FreeAndNil(lJSONObject);

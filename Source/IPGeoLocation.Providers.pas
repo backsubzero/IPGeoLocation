@@ -1,10 +1,10 @@
-{******************************************************************************}
+﻿{******************************************************************************}
 {                                                                              }
 {           IPGeoLocation.Providers                                            }
 {                                                                              }
 {           Copyright (C) Antônio José Medeiros Schneider Júnior               }
 {                                                                              }
-{           https://github.com/antoniojmsjr                                    }
+{           https://github.com/antoniojmsjr/IPGeoLocation                      }
 {                                                                              }
 {                                                                              }
 {******************************************************************************}
@@ -26,8 +26,9 @@ unit IPGeoLocation.Providers;
 
 interface
 
-uses System.SysUtils, REST.Json.Types, IPGeoLocation.Classes, REST.Json,
-REST.Types, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope;
+uses System.SysUtils, REST.Json.Types, REST.Json,
+REST.Types, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
+IPGeoLocation.Types, IPGeoLocation.Interfaces;
 
 type
 
@@ -322,6 +323,66 @@ type
 
   {$ENDREGION}
 
+  {$REGION 'TIPGeoLocationProviderIPGeolocationAPI'}
+
+  TIPGeoLocationProviderIPGeolocationAPI = class(TIPGeoLocationProviderCustom)
+  private
+    { private declarations }
+  protected
+    { protected declarations }
+    function Params: IIPGeoLocationProvider; override;
+    function GetRequest: IIPGeoLocationRequest; override;
+  public
+    { public declarations }
+    constructor Create(pParent: IIPGeoLocation); override;
+  end;
+
+  {$ENDREGION}
+
+  {$REGION 'TIPGeoLocationRequestIPGeolocationAPI'}
+
+  TIPGeoLocationRequestIPGeolocationAPI = class(TIPGeoLocationRequestCustom)
+  private
+    { private declarations }
+  protected
+    { protected declarations }
+    procedure InternalExecute; override;
+  public
+    { public declarations }
+  end;
+
+  {$ENDREGION}
+
+  {$REGION 'TIPGeoLocationProviderIPData'}
+
+  TIPGeoLocationProviderIPData = class(TIPGeoLocationProviderCustom)
+  private
+    { private declarations }
+  protected
+    { protected declarations }
+    function Params: IIPGeoLocationProvider; override;
+    function GetRequest: IIPGeoLocationRequest; override;
+  public
+    { public declarations }
+    constructor Create(pParent: IIPGeoLocation); override;
+  end;
+
+  {$ENDREGION}
+
+  {$REGION 'TIPGeoLocationRequestIPData'}
+
+  TIPGeoLocationRequestIPData = class(TIPGeoLocationRequestCustom)
+  private
+    { private declarations }
+  protected
+    { protected declarations }
+    procedure InternalExecute; override;
+  public
+    { public declarations }
+  end;
+
+  {$ENDREGION}
+
 implementation
 
 uses
@@ -338,7 +399,6 @@ constructor TIPGeoLocationProviderCustom.Create(pParent: IIPGeoLocation; const p
 begin
   Create(pParent);
   FIP := pIP;
-  FID := EmptyStr;
 end;
 
 function TIPGeoLocationProviderCustom.Params: IIPGeoLocationProvider;
@@ -358,7 +418,7 @@ end;
 function TIPGeoLocationProviderCustom.GetRequest: IIPGeoLocationRequest;
 begin
   if not FParamsExecuted then
-    raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_PARAMS_NOT_FOUND,
+    raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_PARAMS_NOT_FOUND,
       FID, 'Configuração não informada.');
 end;
 
@@ -470,17 +530,17 @@ begin
         FRESTClient.BaseURL,
         FRESTResponse.StatusCode,
         FRESTResponse.StatusText,
-        FRESTRequest.Method,
+        RESTRequestMethodToString(FRESTRequest.Method),
         E.Message);
     end;
     on E: Exception do
     begin
-      raise EIPGeoLocationRequestException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_UNKNOWN,
+      raise EIPGeoLocationRequestException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_UNKNOWN,
         FProvider,
         FRESTClient.BaseURL,
         FRESTResponse.StatusCode,
         FRESTResponse.StatusText,
-        FRESTRequest.Method,
+        RESTRequestMethodToString(FRESTRequest.Method),
         E.Message);
     end;
   end;
@@ -497,7 +557,7 @@ begin
       pResult(lJSONObject.ToString);
   finally
     if Assigned(lJSONObject) then
-      lJSONObject.Free;
+      FreeAndNil(lJSONObject);
   end;
 end;
 
@@ -642,7 +702,7 @@ begin
     FRESTRequest.Execute();
   except
     on E: Exception do
-      raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
               FProvider, E.Message);
   end;
 
@@ -657,7 +717,8 @@ begin
 
       try
 
-        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject; //TEncoding.UTF8.GetBytes=CODIFICAÇÃO INTERNA
+        lJSONObject := TJSONObject.ParseJSONValue(
+          FRESTResponse.JSONValue.ToString, False, False) as TJSONObject; //TEncoding.UTF8.GetBytes=CODIFICAÇÃO INTERNA
 
         lJSONObject.TryGetValue('hostname', FHostName);
         lJSONObject.TryGetValue('city', FCity);
@@ -751,7 +812,7 @@ begin
     FRESTRequest.Execute();
   except
     on E: Exception do
-      raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
               FProvider, E.Message);
   end;
 
@@ -766,7 +827,8 @@ begin
 
       try
 
-        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
+        lJSONObject := TJSONObject.ParseJSONValue(
+          FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
 
         lJSONObject.TryGetValue('hostname', FHostName);
         lJSONObject.TryGetValue('country_code2', FCountryCode);
@@ -791,7 +853,7 @@ begin
     end;
     else
     begin
-      raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_API,
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_API,
               FProvider, 'Verificar "StatusCode"');
     end;
   end;
@@ -870,7 +932,7 @@ begin
     FRESTRequest.Execute();
   except
     on E: Exception do
-      raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
               FProvider, E.Message);
   end;
 
@@ -884,7 +946,8 @@ begin
         Exit;
 
       try
-        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
+        lJSONObject := TJSONObject.ParseJSONValue(
+          FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
 
         lJSONObject.TryGetValue('country_code', FCountryCode);
         lJSONObject.GetValue('country').TryGetValue('alpha3_code', FCountryCode3);
@@ -990,7 +1053,7 @@ begin
     FRESTRequest.Execute();
   except
     on E: Exception do
-      raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
               FProvider, E.Message);
   end;
 
@@ -1005,7 +1068,8 @@ begin
 
       try
 
-        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
+        lJSONObject := TJSONObject.ParseJSONValue(
+          FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
 
         lJSONObject.TryGetValue('hostname', FHostName);
         lJSONObject.TryGetValue('country_code', FCountryCode);
@@ -1107,7 +1171,7 @@ begin
     FRESTRequest.Execute();
   except
     on E: Exception do
-      raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
               FProvider, E.Message);
   end;
 
@@ -1122,8 +1186,8 @@ begin
 
       try
 
-        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
-
+        lJSONObject := TJSONObject.ParseJSONValue(
+          FRESTResponse.JSONValue.ToString, False, False) as TJSONObject;
 
         //CONFORME A DOCUMENTAÇÃO DA API
         lJSONObject.TryGetValue('success', lRequestSuccessAPI);
@@ -1131,7 +1195,7 @@ begin
         begin
           lJSONObject := lJSONObject.GetValue('error') as TJSONObject;
           if Assigned(lJSONObject) then
-            raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_API,
+            raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_API,
                                                  FProvider, lJSONObject.ToString);
         end;
 
@@ -1214,7 +1278,7 @@ begin
     FRESTRequest.Execute();
   except
     on E: Exception do
-      raise EIPGeoLocationException.Create(TTypeIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
               FProvider, E.Message);
   end;
 
@@ -1229,7 +1293,8 @@ begin
 
       try
 
-        lJSONObject := TJSONObject.ParseJSONValue(FRESTResponse.JSONValue.ToString, False, False) as TJSONObject; //TEncoding.UTF8.GetBytes=CODIFICAÇÃO INTERNA
+        lJSONObject := TJSONObject.ParseJSONValue(
+          FRESTResponse.JSONValue.ToString, False, False) as TJSONObject; //TEncoding.UTF8.GetBytes=CODIFICAÇÃO INTERNA
 
         lJSONObject.GetValue('location').TryGetValue('country', FCountryCode);
         lJSONObject.GetValue('location').TryGetValue('region', FRegion);
@@ -1238,6 +1303,194 @@ begin
         lJSONObject.GetValue('location').TryGetValue('lng', FLongitude);
         lJSONObject.GetValue('location').TryGetValue('postalCode', FZipCode);
         lJSONObject.GetValue('location').TryGetValue('timezone', FTimeZoneOffset);
+
+      finally
+        if Assigned(lJSONObject) then
+          FreeAndNil(lJSONObject);
+      end;
+
+    end;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION 'TIPGeoLocationProviderIPGeolocationAPI'}
+
+constructor TIPGeoLocationProviderIPGeolocationAPI.Create(
+  pParent: IIPGeoLocation);
+begin
+  inherited;
+  FID := '#IPGEOLOCATIONAPI';
+end;
+
+function TIPGeoLocationProviderIPGeolocationAPI.GetRequest: IIPGeoLocationRequest;
+begin
+  inherited;
+  Result := TIPGeoLocationRequestIPGeolocationAPI.Create(Self, FIP);
+end;
+
+function TIPGeoLocationProviderIPGeolocationAPI.Params: IIPGeoLocationProvider;
+begin
+  Result := inherited;
+
+  FParamsExecuted := True;
+  FURI          := 'https://api.ipgeolocationapi.com/geolocate';
+  FKey          := EmptyStr; //FULL FREE
+  FRequestAccept:= 'application/json';
+  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Free;
+  FRequestLimit := 0;
+  FAvailable    := 0;
+end;
+
+{$ENDREGION}
+
+{$REGION 'TIPGeoLocationRequestIPGeolocationAPI'}
+
+procedure TIPGeoLocationRequestIPGeolocationAPI.InternalExecute;
+var
+  lJSONObject: TJSONObject;
+begin
+  //CONFORME A DOCUMENTAÇÃO DA API
+  FRESTClient.BaseURL := FIPGeoLocationProvider.URI;
+  FRESTClient.Accept  := FIPGeoLocationProvider.RequestAccept;
+
+  FRESTRequest.Resource := '{IP}';
+  FRESTRequest.Method := TRESTRequestMethod.rmGET;
+
+  //IP
+  FRESTRequest.Params.AddItem;
+  FRESTRequest.Params.Items[0].Name   := 'IP';
+  FRESTRequest.Params.Items[0].Value  := FIP;
+  FRESTRequest.Params.Items[0].Kind   := TRESTRequestParameterKind.pkURLSEGMENT;
+
+  //REQUISIÇÃO
+  try
+    FRESTRequest.Execute();
+  except
+    on E: Exception do
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
+              FProvider, E.Message);
+  end;
+
+  //CONFORME A DOCUMENTAÇÃO DA API
+  case FRESTResponse.StatusCode of
+    200:
+    begin
+
+      if (FRESTResponse.JSONValue.Null) or
+          not (FRESTResponse.JSONValue is TJSONObject) then
+        Exit;
+
+      try
+
+        lJSONObject := TJSONObject.ParseJSONValue(
+          FRESTResponse.JSONValue.ToString, False, False) as TJSONObject; //TEncoding.UTF8.GetBytes=CODIFICAÇÃO INTERNA
+
+        lJSONObject.TryGetValue('alpha2', FCountryCode);
+        lJSONObject.TryGetValue('alpha3', FCountryCode3);
+        lJSONObject.GetValue('geo').TryGetValue('latitude', FLatitude);
+        lJSONObject.GetValue('geo').TryGetValue('longitude', FLongitude);
+
+      finally
+        if Assigned(lJSONObject) then
+          FreeAndNil(lJSONObject);
+      end;
+
+    end;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION 'TIPGeoLocationProviderIPData'}
+
+constructor TIPGeoLocationProviderIPData.Create(pParent: IIPGeoLocation);
+begin
+  inherited;
+  FID := '#IPDATA';
+end;
+
+function TIPGeoLocationProviderIPData.GetRequest: IIPGeoLocationRequest;
+begin
+  inherited;
+  Result := TIPGeoLocationRequestIPData.Create(Self, FIP);
+end;
+
+function TIPGeoLocationProviderIPData.Params: IIPGeoLocationProvider;
+begin
+  Result := inherited;
+
+  FParamsExecuted := True;
+  FURI          := 'https://api.ipdata.co';
+  FKey          := 'TOKEN';
+  FRequestAccept:= 'application/json';
+  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Day;
+  FRequestLimit := 1500;
+  FAvailable    := 0;
+end;
+
+{$ENDREGION}
+
+{$REGION 'TIPGeoLocationRequestIPData'}
+
+procedure TIPGeoLocationRequestIPData.InternalExecute;
+var
+  lJSONObject: TJSONObject;
+begin
+  //CONFORME A DOCUMENTAÇÃO DA API
+  FRESTClient.BaseURL := FIPGeoLocationProvider.URI;
+  FRESTClient.Accept  := FIPGeoLocationProvider.RequestAccept;
+
+  FRESTRequest.Resource := '{IP}';
+  FRESTRequest.Method := TRESTRequestMethod.rmGET;
+
+  //IP
+  FRESTRequest.Params.AddItem;
+  FRESTRequest.Params.Items[0].Name   := 'IP';
+  FRESTRequest.Params.Items[0].Value  := FIP;
+  FRESTRequest.Params.Items[0].Kind   := TRESTRequestParameterKind.pkURLSEGMENT;
+
+  //API Key
+  FRESTRequest.Params.AddItem;
+  FRESTRequest.Params.Items[1].Name   := 'api-key';
+  FRESTRequest.Params.Items[1].Value  := FIPGeoLocationProvider.Key;
+  FRESTRequest.Params.Items[1].Kind   := TRESTRequestParameterKind.pkQUERY;
+
+  //REQUISIÇÃO
+  try
+    FRESTRequest.Execute();
+  except
+    on E: Exception do
+      raise EIPGeoLocationException.Create(TIPGeoLocationExceptionKind.iglEXCEPT_HTTP,
+              FProvider, E.Message);
+  end;
+
+  //CONFORME A DOCUMENTAÇÃO DA API
+  case FRESTResponse.StatusCode of
+    200:
+    begin
+
+      if (FRESTResponse.JSONValue.Null) or
+          not (FRESTResponse.JSONValue is TJSONObject) then
+        Exit;
+
+      try
+
+        lJSONObject := TJSONObject.ParseJSONValue(
+          FRESTResponse.JSONValue.ToString, False, False) as TJSONObject; //TEncoding.UTF8.GetBytes=CODIFICAÇÃO INTERNA
+
+        lJSONObject.TryGetValue('country_code', FCountryCode);
+        lJSONObject.TryGetValue('flag', FCountryFlag);
+        lJSONObject.TryGetValue('country_name', FCountryName);
+        lJSONObject.TryGetValue('region', FRegion);
+        lJSONObject.TryGetValue('city', FCity);
+        lJSONObject.TryGetValue('postal', FZipCode);
+        lJSONObject.TryGetValue('latitude', FLatitude);
+        lJSONObject.TryGetValue('longitude', FLongitude);
+        lJSONObject.GetValue('asn').TryGetValue('name', FISP);
+        lJSONObject.GetValue('time_zone').TryGetValue('offset', FTimeZoneOffset);
+        lJSONObject.GetValue('time_zone').TryGetValue('name', FTimeZoneName);
 
       finally
         if Assigned(lJSONObject) then

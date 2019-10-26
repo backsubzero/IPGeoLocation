@@ -1,8 +1,8 @@
-{******************************************************************************}
+ï»¿{******************************************************************************}
 {                                                                              }
-{           Demo                                              }
+{           IPGeoLocation                                                      }
 {                                                                              }
-{           Copyright (C) Antônio José Medeiros Schneider Júnior               }
+{           Copyright (C) AntÃ´nio JosÃ© Medeiros Schneider JÃºnior               }
 {                                                                              }
 {           https://github.com/antoniojmsjr/IPGeoLocation                      }
 {                                                                              }
@@ -22,23 +22,54 @@
 {  limitations under the License.                                              }
 {                                                                              }
 {******************************************************************************}
-program Demo;
+unit IPGeoLocation;
 
-uses
-  Vcl.Forms,
-  Main in 'Main.pas' {frmMain},
-  Vcl.Themes,
-  Vcl.Styles;
+interface
 
-{$R *.res}
+uses System.SysUtils, System.Classes, IPGeoLocation.Types, IPGeoLocation.Interfaces;
 
+type
+
+  {$REGION 'TIPGeoLocation'}
+
+  TIPGeoLocation = class(TInterfacedObject, IIPGeoLocation)
+  strict private
+    { private declarations }
+    FIP: string;
+    function GetIP(const Value: string): IIPGeoLocation;
+    function GetProvider(const pType: TIPGeoLocationProviderType): IIPGeoLocationProvider;
+  protected
+    { protected declarations }
+  public
+    { public declarations }
+    class function New: IIPGeoLocation;
+  end;
+
+  {$ENDREGION}
+
+implementation
+
+uses IPGeoLocation.Providers.Factory;
+
+{$REGION 'TIPGeoLocation'}
+
+class function TIPGeoLocation.New: IIPGeoLocation;
 begin
-  //Verificação Memory Leak
-  ReportMemoryLeaksOnShutdown := True;
+  Result := Self.Create();
+end;
 
-  Application.Initialize;
-  Application.MainFormOnTaskbar := True;
-  Application.Title := 'IPGeolocation';
-  Application.CreateForm(TfrmMain, frmMain);
-  Application.Run;
+function TIPGeoLocation.GetProvider(
+  const pType: TIPGeoLocationProviderType): IIPGeoLocationProvider;
+begin
+  Result := TIPGeoLocationProviderFactory.NewProvider(pType, Self, FIP);
+end;
+
+function TIPGeoLocation.GetIP(const Value: string): IIPGeoLocation;
+begin
+  Result := Self;
+  FIP := Value;
+end;
+
+{$ENDREGION}
+
 end.
