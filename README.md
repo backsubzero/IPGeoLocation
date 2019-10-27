@@ -62,7 +62,7 @@ Essa tecnologia é amplamente usada em:
 
 ## Demo
 
-![Download](https://img.shields.io/badge/Download-Demo.zip-orange.svg)
+[![Download](https://img.shields.io/badge/Download-Demo.zip-orange.svg)]
 (https://github.com/antoniojmsjr/IPGeoLocation/files/3775350/Demo.zip)
 
 ```delphi
@@ -97,7 +97,6 @@ Essa tecnologia é amplamente usada em:
   end;
 ```
 ![IP Geolocalização](https://user-images.githubusercontent.com/20980984/67627133-0e618680-f82d-11e9-9594-2d71a621daa4.png)
-
 
 ## Licença
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/antoniojmsjr/IPGeoLocation/blob/master/LICENSE)
