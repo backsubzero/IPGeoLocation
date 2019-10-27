@@ -100,3 +100,5 @@ Essa tecnologia é amplamente usada em:
 
 ## Licença
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/antoniojmsjr/IPGeoLocation/blob/master/LICENSE)
+
+## AJMS
