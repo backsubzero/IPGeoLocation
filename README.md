@@ -62,10 +62,8 @@ Essa tecnologia é amplamente usada em:
 
 ## Demo
 
-![License](https://img.shields.io/badge/Download-Demo.zip-orange.svg)
-[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]
-
-
+[![Download](https://img.shields.io/badge/Download-Demo.zip-orange.svg)]
+(https://github.com/antoniojmsjr/IPGeoLocation/files/3775350/Demo.zip)
 
 ```delphi
   try
