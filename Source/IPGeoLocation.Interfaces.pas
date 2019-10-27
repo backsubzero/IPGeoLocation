@@ -49,7 +49,7 @@ type
     function GetURI: string;
     function GetRequestAccept: string;
     function GetKey: string;
-    function GetRequestPer: TTypeIPGeoLocationRequestLimitPer;
+    function GetRequestPer: TIPGeoLocationRequestLimitPer;
     function GetRequestLimit: LongInt;
     function GetAvailable: TDateTime;
     function GetTimeout: Integer;
@@ -61,7 +61,7 @@ type
     property URI: string read GetURI;
     property Key: string read GetKey;
     property RequestAccept: string read GetRequestAccept;
-    property RequestPer: TTypeIPGeoLocationRequestLimitPer read GetRequestPer;
+    property RequestPer: TIPGeoLocationRequestLimitPer read GetRequestPer;
     property RequestLimit: LongInt read GetRequestLimit;
     property Available: TDateTime read GetAvailable;
     property Timeout: Integer read GetTimeout;

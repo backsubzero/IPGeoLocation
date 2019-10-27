@@ -41,7 +41,7 @@ type
     function GetURI: string;
     function GetKey: string;
     function GetRequestAccept: string;
-    function GetRequestPer: TTypeIPGeoLocationRequestLimitPer;
+    function GetRequestPer: TIPGeoLocationRequestLimitPer;
     function GetRequestLimit: LongInt;
     function GetAvailable: TDateTime;
     function GetTimeout: Integer;
@@ -56,7 +56,7 @@ type
     FURI: string;
     FKey: string;
     FRequestAccept: string;
-    FRequestPer: TTypeIPGeoLocationRequestLimitPer;
+    FRequestPer: TIPGeoLocationRequestLimitPer;
     FRequestLimit: LongInt;
     FAvailable: TDateTime;
     FTimeout: Integer;
@@ -409,7 +409,7 @@ begin
   FURI := EmptyStr;
   FKey := EmptyStr;
   FRequestAccept := EmptyStr;
-  FRequestPer := TTypeIPGeoLocationRequestLimitPer.iglPer_UNKNOWN;
+  FRequestPer := TIPGeoLocationRequestLimitPer.iglPer_UNKNOWN;
   FRequestLimit := 0;
   FTimeout := 30000;
   FAvailable := 0;
@@ -452,7 +452,7 @@ begin
   Result := FRequestLimit;
 end;
 
-function TIPGeoLocationProviderCustom.GetRequestPer: TTypeIPGeoLocationRequestLimitPer;
+function TIPGeoLocationProviderCustom.GetRequestPer: TIPGeoLocationRequestLimitPer;
 begin
   Result := FRequestPer;
 end;
@@ -662,12 +662,12 @@ begin
   Result := inherited;
 
   FParamsExecuted := True;
-  FURI          := 'https://ipinfo.io';
-  FKey          := 'TOKEN';
-  FRequestAccept:= 'application/json';
-  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_month;
-  FRequestLimit := 50000;
-  FAvailable    := 0;
+  FURI            := 'https://ipinfo.io';
+  FKey            := 'TOKEN';
+  FRequestAccept  := 'application/json';
+  FRequestPer     := TIPGeoLocationRequestLimitPer.iglPer_month;
+  FRequestLimit   := 50000;
+  FAvailable      := 0;
 end;
 
 {$ENDREGION}
@@ -766,12 +766,12 @@ begin
   Result := inherited;
 
   FParamsExecuted := True;
-  FURI          := 'https://api.ipgeolocation.io/ipgeo';
-  FKey          := 'TOKEN';
-  FRequestAccept:= 'application/json';
-  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Month;
-  FRequestLimit := 30000;
-  FAvailable    := 0;
+  FURI            := 'https://api.ipgeolocation.io/ipgeo';
+  FKey            := 'TOKEN';
+  FRequestAccept  := 'application/json';
+  FRequestPer     := TIPGeoLocationRequestLimitPer.iglPer_Month;
+  FRequestLimit   := 30000;
+  FAvailable      := 0;
 end;
 
 {$ENDREGION}
@@ -880,12 +880,12 @@ begin
   Result := inherited;
 
   FParamsExecuted := True;
-  FURI          := 'https://api.ip2location.com/v2/';
-  FKey          := 'TOKEN';
-  FRequestAccept:= 'application/json';
-  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Day;
-  FRequestLimit := 200;
-  FAvailable    := 0;
+  FURI            := 'https://api.ip2location.com/v2/';
+  FKey            := 'TOKEN';
+  FRequestAccept  := 'application/json';
+  FRequestPer     := TIPGeoLocationRequestLimitPer.iglPer_Day;
+  FRequestLimit   := 200;
+  FAvailable      := 0;
 end;
 
 {$ENDREGION}
@@ -993,12 +993,12 @@ begin
   Result := inherited;
 
   FParamsExecuted := True;
-  FURI          := 'http://api.ipapi.com/api/';
-  FKey          := 'TOKEN';
-  FRequestAccept:= 'application/json';
-  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Month;
-  FRequestLimit := 10000;
-  FAvailable    := 0;
+  FURI            := 'http://api.ipapi.com/api/';
+  FKey            := 'TOKEN';
+  FRequestAccept  := 'application/json';
+  FRequestPer     := TIPGeoLocationRequestLimitPer.iglPer_Month;
+  FRequestLimit   := 10000;
+  FAvailable      := 0;
 end;
 
 {$ENDREGION}
@@ -1111,12 +1111,12 @@ begin
   Result := inherited;
 
   FParamsExecuted := True;
-  FURI          := 'http://api.ipstack.com/';
-  FKey          := 'TOKEN';
-  FRequestAccept:= 'application/json';
-  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Month;
-  FRequestLimit := 10000;
-  FAvailable    := 0;
+  FURI            := 'http://api.ipstack.com/';
+  FKey            := 'TOKEN';
+  FRequestAccept  := 'application/json';
+  FRequestPer     := TIPGeoLocationRequestLimitPer.iglPer_Month;
+  FRequestLimit   := 10000;
+  FAvailable      := 0;
 end;
 
 {$ENDREGION}
@@ -1239,12 +1239,12 @@ begin
   Result := inherited;
 
   FParamsExecuted := True;
-  FURI          := 'https://geo.ipify.org/api/v1/';
-  FKey          := 'TOKEN';
-  FRequestAccept:= 'application/json';
-  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Month;
-  FRequestLimit := 10000;
-  FAvailable    := 0;
+  FURI            := 'https://geo.ipify.org/api/v1/';
+  FKey            := 'TOKEN';
+  FRequestAccept  := 'application/json';
+  FRequestPer     := TIPGeoLocationRequestLimitPer.iglPer_Month;
+  FRequestLimit   := 10000;
+  FAvailable      := 0;
 end;
 
 {$ENDREGION}
@@ -1335,12 +1335,12 @@ begin
   Result := inherited;
 
   FParamsExecuted := True;
-  FURI          := 'https://api.ipgeolocationapi.com/geolocate';
-  FKey          := EmptyStr; //FULL FREE
-  FRequestAccept:= 'application/json';
-  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Free;
-  FRequestLimit := 0;
-  FAvailable    := 0;
+  FURI            := 'https://api.ipgeolocationapi.com/geolocate';
+  FKey            := EmptyStr; //FULL FREE
+  FRequestAccept  := 'application/json';
+  FRequestPer     := TIPGeoLocationRequestLimitPer.iglPer_Free;
+  FRequestLimit   := 0;
+  FAvailable      := 0;
 end;
 
 {$ENDREGION}
@@ -1422,12 +1422,12 @@ begin
   Result := inherited;
 
   FParamsExecuted := True;
-  FURI          := 'https://api.ipdata.co';
-  FKey          := 'TOKEN';
-  FRequestAccept:= 'application/json';
-  FRequestPer   := TTypeIPGeoLocationRequestLimitPer.iglPer_Day;
-  FRequestLimit := 1500;
-  FAvailable    := 0;
+  FURI            := 'https://api.ipdata.co';
+  FKey            := 'TOKEN';
+  FRequestAccept  := 'application/json';
+  FRequestPer     := TIPGeoLocationRequestLimitPer.iglPer_Day;
+  FRequestLimit   := 1500;
+  FAvailable      := 0;
 end;
 
 {$ENDREGION}

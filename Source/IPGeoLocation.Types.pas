@@ -35,11 +35,11 @@ type
                                 IPIfy=6, IPGeolocationAPI=7,
                                 IPData=8);
 
-TTypeIPGeoLocationRequestLimitPer = (iglPer_UNKNOWN=0,
-                                     iglPer_Day=1,
-                                     iglPer_Month=2,
-                                     iglPer_Year=3,
-                                     iglPer_Free=4);
+  TIPGeoLocationRequestLimitPer = (iglPer_UNKNOWN=0,
+                                   iglPer_Day=1,
+                                   iglPer_Month=2,
+                                   iglPer_Year=3,
+                                   iglPer_Free=4);
 
   TIPGeoLocationExceptionKind = (iglEXCEPT_UNKNOWN=0,
                                  iglEXCEPT_HTTP=1,
