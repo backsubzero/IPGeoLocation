@@ -62,7 +62,7 @@ Essa tecnologia é amplamente usada em:
 
 ## Demo
 
-[![Demo]https://img.shields.io/badge/Download-Demo.zip-orange](https://github.com/antoniojmsjr/IPGeoLocation/files/3775350/Demo.zip)
+[![License]https://img.shields.io/badge/Download-Demo.zip-orange]
 
 
 
@@ -101,4 +101,4 @@ Essa tecnologia é amplamente usada em:
 
 
 ## Licença
-[![License1](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/antoniojmsjr/IPGeoLocation/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/antoniojmsjr/IPGeoLocation/blob/master/LICENSE)
