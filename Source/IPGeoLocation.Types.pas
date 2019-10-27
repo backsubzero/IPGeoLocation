@@ -114,7 +114,6 @@ begin
   end;
 end;
 
-
 {$REGION 'EIPGeoLocationException'}
 
 constructor EIPGeoLocationException.Create(const pKind: TIPGeoLocationExceptionKind;
