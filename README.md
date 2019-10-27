@@ -62,7 +62,7 @@ Essa tecnologia é amplamente usada em:
 
 ## Demo
 
-[![Download](https://img.shields.io/badge/Download-Demo.zip-orange.svg)]
+![Download](https://img.shields.io/badge/Download-Demo.zip-orange.svg)
 (https://github.com/antoniojmsjr/IPGeoLocation/files/3775350/Demo.zip)
 
 ```delphi
