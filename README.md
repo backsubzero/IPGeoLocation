@@ -63,6 +63,7 @@ Essa tecnologia é amplamente usada em:
 ## Demo
 
 [![License]https://img.shields.io/badge/Download-Demo.zip-orange]
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]
 
 
 
