@@ -61,9 +61,7 @@ Essa tecnologia é amplamente usada em:
 | IP Data | https://ipdata.co | https://api.ipdata.co |
 
 ## Demo
-
-[![(https://github.com/antoniojmsjr/IPGeoLocation/files/3775350/Demo.zip)](https://img.shields.io/badge/Download-Demo.zip-orange.svg)]
-
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/antoniojmsjr/IPGeoLocation/blob/master/LICENSE)
 
 ```delphi
   try
