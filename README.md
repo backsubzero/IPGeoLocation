@@ -64,6 +64,10 @@ Essa tecnologia é amplamente usada em:
 [![Download](https://img.shields.io/badge/Download-Demo.zip-orange.svg)](https://github.com/antoniojmsjr/IPGeoLocation/files/3775350/Demo.zip)
 
 ```delphi
+uses IPGeoLocation, IPGeoLocation.Types;
+```
+
+```delphi
   try
      TIPGeoLocation
     .New
